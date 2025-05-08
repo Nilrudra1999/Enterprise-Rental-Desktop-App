@@ -1,17 +1,29 @@
+/***********************************************************************************************************************
+ * Enterprise Rental Desktop Application
+ *
+ * MaintenanceRecord.java is a model class which holds all related information for a single maintenance record that
+ * belongs to a single vehicle. The class contains getter methods for all data members and a parameterized constructor.
+ * Includes the date of maintenance, description of work, separate service and materials costs.
+ **********************************************************************************************************************/
 package models;
 
+import java.time.LocalDate;
+
 public class MaintenanceRecord {
-    private String date;
-    private String desc;
-    private double cost;
+    private final LocalDate date;
+    private final String desc;
+    private final double serviceCost;
+    private final double materialCost;
 
-    public MaintenanceRecord() { }
+    public MaintenanceRecord(LocalDate date, double serviceCost, double materialCost, String desc) {
+        this.date = date;
+        this.serviceCost = serviceCost;
+        this.materialCost = materialCost;
+        this.desc = desc;
+    }
 
-    public String getDate() { return date; }
+    public LocalDate getDate() { return date; }
     public String getDesc() { return desc; }
-    public double getCost() { return cost; }
-
-    public void setDate(String date) { this.date = date; }
-    public void setDesc(String desc) { this.desc = desc; }
-    public void setCost(double cost) { this.cost = cost; }
+    public double getServiceCost() { return serviceCost; }
+    public double getMaterialCost() { return materialCost; }
 }
