@@ -13,7 +13,9 @@ import utils.SceneName;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.text.Font;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,6 +24,7 @@ import java.sql.SQLException;
 // Updating and deleting vehicle or any related records however, is not supported
 public class Main extends Application {
     private static Connection connection;
+    private static SceneBuilder sceneBuilder;
 
     public static void main(String[] args) {
         buildConnection();
@@ -29,9 +32,12 @@ public class Main extends Application {
     }
 
 
+
+    public static SceneBuilder getSceneBuilder() { return sceneBuilder; }
     @Override public void start(Stage stage) {
         try {
-            SceneBuilder sceneBuilder = new SceneBuilder();
+            Font.loadFont(new FileInputStream("src/styles/PressStart2P-Regular.ttf"), 10);
+            sceneBuilder = new SceneBuilder();
             stage.setResizable(false); // 840 x 1280 (HxW)
             stage.setScene(sceneBuilder.getSceneMap().get(SceneName.HOMESCREEN));
             stage.setTitle("Enterprise Rentals Inc. - Vehicle Tracking System");
@@ -40,11 +46,13 @@ public class Main extends Application {
     }
 
 
+
     @Override public void stop() {
         try {
             if (connection != null) connection.close();
         } catch (SQLException e) { e.printStackTrace(); }
     }
+
 
 
     public static Connection getConnection() { return connection; }

@@ -41,6 +41,7 @@ public class SceneBuilder {
         sceneMap.put(SceneName.MAINTENANCEFORM, new Scene(loaderMap.get(SceneName.MAINTENANCEFORM).load()));
     }
 
+
     public Map<SceneName, FXMLLoader> getLoaderMap() { return loaderMap; }
     public Map<SceneName, Scene> getSceneMap() { return sceneMap; }
 }

@@ -22,6 +22,7 @@ public class MaintenanceRecord {
         this.desc = desc;
     }
 
+
     public LocalDate getDate() { return date; }
     public String getDesc() { return desc; }
     public double getServiceCost() { return serviceCost; }

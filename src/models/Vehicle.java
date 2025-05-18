@@ -27,13 +27,16 @@ public class Vehicle {
         logs = new ArrayList<>();
     }
 
+
     public void setRecords(MaintenanceRecord record) { records.add(record); }
     public void setLogs(UsageLog log) { logs.add(log); }
+
 
     public int getYear() { return year; }
     public String getMake() { return make; }
     public String getModel() { return model; }
     public String getType() { return type; }
+
 
     public Collection<MaintenanceRecord> getRecords() { return records; }
     public Collection<UsageLog> getLogs() { return logs; }

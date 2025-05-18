@@ -20,6 +20,7 @@ public class UsageLog {
         this.kmDriven = kmDriven;
     }
 
+
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
     public int getKmDriven() { return kmDriven; }
