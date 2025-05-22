@@ -15,7 +15,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -36,7 +35,7 @@ public class Main extends Application {
     public static SceneBuilder getSceneBuilder() { return sceneBuilder; }
     @Override public void start(Stage stage) {
         try {
-            Font.loadFont(new FileInputStream("src/styles/PressStart2P-Regular.ttf"), 10);
+            Font.loadFont(Main.class.getResourceAsStream("/styles/PressStart2P-Regular.ttf"), 40);
             sceneBuilder = new SceneBuilder();
             stage.setResizable(false); // 840 x 1280 (HxW)
             stage.setScene(sceneBuilder.getSceneMap().get(SceneName.HOMESCREEN));
