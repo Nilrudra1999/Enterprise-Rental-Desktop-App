@@ -1,0 +1,11 @@
+/* CSS for the base pane and title text, used as a starting template for all other panes */
+#titlePane {
+    -fx-border-color: transparent transparent black transparent;
+    -fx-border-width: 0 0 4px 0;
+    -fx-border-style: solid;
+}
+
+#titleText {
+    -fx-font-family: "Press Start 2P Regular";
+    -fx-font-size: 30px;
+}
