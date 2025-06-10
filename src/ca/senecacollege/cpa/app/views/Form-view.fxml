@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="631.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.senecacollege.cpa.app.controller.MyController">
+   <children>
+      <Button fx:id="btnSave" layoutX="38.0" layoutY="589.0" mnemonicParsing="false" onAction="#save" text="Save" />
+      <Button fx:id="btnClear" layoutX="288.0" layoutY="589.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
+      <Button fx:id="btnView" layoutX="483.0" layoutY="589.0" mnemonicParsing="false" onAction="#viewSummary" text="View Summary" />
+      <Text layoutX="180.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Vehicle Information">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="vdmodel" layoutX="119.0" layoutY="100.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter Model" />
+      <TextField fx:id="vdmake" layoutX="119.0" layoutY="137.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter Make" />
+      <Text layoutX="119.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Details">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="vdyear" layoutX="119.0" layoutY="177.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter Year Number (e.g. 2022)" />
+      <ChoiceBox fx:id="vdtype" accessibleText="Type" layoutX="119.0" layoutY="216.0" prefHeight="25.0" prefWidth="377.0" />
+      <Text layoutX="119.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance Record">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="mrDesc" layoutX="119.0" layoutY="326.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter Description" />
+      <TextField fx:id="mrCost" layoutX="119.0" layoutY="367.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter Cost (e.g. 200.00)" />
+      <Text layoutX="119.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usage Log">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="ulkm" layoutX="119.0" layoutY="516.0" prefHeight="25.0" prefWidth="377.0" promptText=" Enter km Driven" />
+      <DatePicker fx:id="mrDate" layoutX="122.0" layoutY="286.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter Date" />
+      <DatePicker fx:id="ulstart" layoutX="119.0" layoutY="435.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter start Date" />
+      <DatePicker fx:id="ulend" layoutX="119.0" layoutY="474.0" prefHeight="25.0" prefWidth="377.0" promptText="Enter End Date" />
+   </children>
+</AnchorPane>
