@@ -1,19 +1,14 @@
-/*********************************************************************************************
- Workshop 2
- Course: Applications Development, APD545 - Semester 5
- Last Name: Mukhopadhyay
- First Name: Nilrudra
- ID: 134061175
- Section: NCC
- This assignment represents my own work in accordance with Seneca Academic Policy.
- Signature: Nilrudra Mukhopadhyay
- Date: 2025-02-09
- *********************************************************************************************/
-package ca.senecacollege.cpa.app.controller;
+/***********************************************************************************************************************
+ * Enterprise Rental Desktop Application
+ *
+ * MyController.java is the main controller of the application and contains the all the logic for UI interactions as
+ * well as a global variable for storing app wide data when using this app. Since no database is connected to the app
+ * no information is kept when the app is closed.
+ **********************************************************************************************************************/
+package controller;
 
-import ca.senecacollege.cpa.app.models.MaintenanceRecord;
-import ca.senecacollege.cpa.app.models.UsageLog;
-import ca.senecacollege.cpa.app.models.Vehicle;
+import models.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,19 +28,19 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-// Controller class handles UI elements and data by talking with the model classes
-// When each event it proked then the model objects are created or viewed, no updates or deletes
+
+
 public class MyController implements Initializable {
     @FXML private TextField vdmodel, vdmake, vdyear, mrDesc, mrCost, ulkm;
     @FXML private ChoiceBox<String> vdtype;
-    @FXML private Button btnSave, btnClear, btnView, backBtn;
-    @FXML private Pane vdPane;
     @FXML private DatePicker mrDate, ulstart, ulend;
+    @FXML private Pane vdPane;
 
-    private static final String NUMBER_PATTERN = "\\d*";            // found this on Google
-    private static final String DOUBLE_PATTERN = "\\d*(\\.\\d*)?";  // found this on Google
-    private String[] vehicles = {"Sedan", "Truck", "SUV"};
+    private static final String NUMBER_PATTERN = "\\d*";
+    private static final String DOUBLE_PATTERN = "\\d*(\\.\\d*)?";
+    private final String[] vehicles = {"Sedan", "Truck", "SUV"};
     private static Collection<Vehicle> vehicleList = new ArrayList<>();
+
 
     @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         // If statement below stops null exceptions when switching scenes
@@ -54,8 +49,6 @@ public class MyController implements Initializable {
     public Pane getVdPane() { return vdPane; }
 
 
-    // Event handlers ------------------------------------------------------------------------------
-    // Save event handler for creating objects when form's data is saved
     public void save(ActionEvent event) {
         String model = vdmodel.getText().trim();
         String make = vdmake.getText().trim();
@@ -101,7 +94,6 @@ public class MyController implements Initializable {
     }
 
 
-    // View event handler for switching the scene depending on the user's click
     public void viewSummary(ActionEvent event) {
         Dialog<ButtonType> dialog = new Dialog<>(); // pop-up of buttons
         dialog.setTitle("Vehicle Summarys");
@@ -116,41 +108,34 @@ public class MyController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait(); // waits for user selection
         result.ifPresent(button -> {
             if (button == btnDetails) {
-                detailsRender(event, "/ca/senecacollege/cpa/app/views/Summary-view.fxml");
+                detailsRender(event, "/views/Summary-view.fxml");
             } else if (button == btnRecord) {
-                detailsRender(event, "/ca/senecacollege/cpa/app/views/Record-view.fxml");
+                detailsRender(event, "/views/Record-view.fxml");
             } else if (button == btnLogs) {
-                detailsRender(event, "/ca/senecacollege/cpa/app/views/Usage-logs-view.fxml");
+                detailsRender(event, "/views/Usage-logs-view.fxml");
             }
         }); // If the user clicks "Close", dialog will close
     }
 
 
-    // Clear event handler for clearing the form and doing nothing else
     public void clear(ActionEvent event) {
         clearFields();
         showAlert("Cleared", "Form cleared!");
     }
 
 
-    // Go back event handler for the table view pages, sends user back to main scene
     public void goBack(ActionEvent event) {
         try {
-            String filename = "/ca/senecacollege/cpa/app/views/Form-view.fxml";
+            String filename = "/views/Form-view.fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getResource(filename));
             Parent root = loader.load();
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
+        } catch (Exception err) { err.printStackTrace(); }
     }
 
 
-
-    // Util private functions used by the controller -----------------------------------------------
-    // Displays a pop-up alert for the event that just occured
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -159,7 +144,7 @@ public class MyController implements Initializable {
         alert.showAndWait();
     }
 
-    // Clears the forms fields and sets the choice box to null
+
     private void clearFields() {
         vdmodel.clear();
         vdmake.clear();
@@ -175,7 +160,7 @@ public class MyController implements Initializable {
         ulkm.clear();
     }
 
-    // Sets the scene for the table view depending on the view filename passed
+
     private void detailsRender(ActionEvent event, String fileName) {
         try {
             if (vehicleList.isEmpty()) {
@@ -190,17 +175,15 @@ public class MyController implements Initializable {
             MyController controller = loader.getController();
             Pane vdPane = controller.getVdPane();
             switch (fileName) {
-                case "/ca/senecacollege/cpa/app/views/Summary-view.fxml" -> renderVehicleDetails(vdPane);
-                case "/ca/senecacollege/cpa/app/views/Record-view.fxml" -> renderVehicleRecords(vdPane);
-                case "/ca/senecacollege/cpa/app/views/Usage-logs-view.fxml" -> renderVehicleLogs(vdPane);
+                case "/views/Summary-view.fxml" -> renderVehicleDetails(vdPane);
+                case "/views/Record-view.fxml" -> renderVehicleRecords(vdPane);
+                case "/views/Usage-logs-view.fxml" -> renderVehicleLogs(vdPane);
             }
             stage.show();
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
+        } catch (Exception err) { err.printStackTrace(); }
     }
 
-    // Renders rows of vehicle details to output the contents of the collection
+
     private void renderVehicleDetails(Pane vdPane) {
         vdPane.getChildren().clear(); // clearing previous content
         double yOffset = 10;
@@ -215,7 +198,7 @@ public class MyController implements Initializable {
         }
     }
 
-    // Renders rows of Maintenance records to output the contents of the collection
+
     private void renderVehicleRecords(Pane vdPane) {
         vdPane.getChildren().clear(); // clearing previous content
         double yOffset = 10;
@@ -231,7 +214,7 @@ public class MyController implements Initializable {
         }
     }
 
-    // Renders rows of Usage log data to output the contents of the collection
+
     private void renderVehicleLogs(Pane vdPane) {
         vdPane.getChildren().clear(); // clearing previous content
         double yOffset = 10;
